@@ -12,7 +12,7 @@ var mousePressed = false;
 /*
 prepare the drawing canvas 
 */
-//$(function() {
+$(function() {
     console.log("in main.js")
     canvas = window._canvas = new fabric.Canvas('canvas');
     canvas.backgroundColor = '#ffffff';
@@ -33,7 +33,8 @@ prepare the drawing canvas
     canvas.on('mouse:move', function(e) {
         recordCoor(e)
     }); 
-//})
+
+})
 
 /*
 set the table of the predictions 
@@ -42,13 +43,26 @@ setGuesses = (top5, probs) => {
 
         let guess = document.getElementById('guess')
         let prob = document.getElementById('prob')
-        guess.innerHTML = "That's clearly a"+top5[0]+" !";
+        let firstGuess = top5[0];
+        guess.innerHTML = "That's clearly " + getArticle(firstGuess) + " " + firstGuess +" !";
         prob.innerHTML = Math.round(probs[0] * 100)
 }
 
-/* check if the word starts with a wovel */
-checkArticle = () =>{
+/* check if the word starts with a wovel and return a/an */
+getArticle = (guess) =>{
 
+    var vowels = [a, e, i, o, u];
+    var isVowel = false;
+    var article = "";
+    
+    for (var i = 0; i < vowels.length; i++){
+        if(guess[0] === i) isVowel = true;
+    }
+
+    if(isWovel) article = "an";
+    else article = "a";
+
+    return article;
 
 }
 
