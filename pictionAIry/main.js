@@ -9,13 +9,10 @@ var canvas;
 var coords = [];
 var mousePressed = false;
 
-
-var canvas;
-
 /*
 prepare the drawing canvas 
 */
-$(function() {
+//$(function() {
     console.log("in main.js")
     canvas = window._canvas = new fabric.Canvas('canvas');
     canvas.backgroundColor = '#ffffff';
@@ -36,25 +33,29 @@ $(function() {
     canvas.on('mouse:move', function(e) {
         recordCoor(e)
     }); 
-})
+//})
 
 /*
 set the table of the predictions 
 */
-function setTable(top5, probs) {
-    //loop over the predictions 
-    for (var i = 0; i < top5.length; i++) {
-        let sym = document.getElementById('sym' + (i + 1))
-        let prob = document.getElementById('prob' + (i + 1))
-        sym.innerHTML = top5[i]
-        prob.innerHTML = Math.round(probs[i] * 100)
-    }
+setGuesses = (top5, probs) => {
+
+        let guess = document.getElementById('guess')
+        let prob = document.getElementById('prob')
+        guess.innerHTML = "That's clearly a"+top5[0]+" !";
+        prob.innerHTML = Math.round(probs[0] * 100)
+}
+
+/* check if the word starts with a wovel */
+checkArticle = () =>{
+
+
 }
 
 /*
 record the current drawing coordinates
 */
-function recordCoor(event) {
+recordCoor = (event) => {
     var pointer = canvas.getPointer(event.e);
     var posX = pointer.x;
     var posY = pointer.y;
@@ -67,7 +68,7 @@ function recordCoor(event) {
 /*
 get the best bounding box by trimming around the drawing
 */
-function getMinBox() {
+getMinBox = () => {
     //get coordinates 
     var coorX = coords.map(function(p) {
         return p.x
@@ -96,7 +97,7 @@ function getMinBox() {
 /*
 get the current image data 
 */
-function getImageData() {
+getImageData = () => {
         //get the minimum bounding box around the drawing 
         const mbb = getMinBox()
 
@@ -105,7 +106,7 @@ function getImageData() {
         const imgData = canvas.contextContainer.getImageData(mbb.min.x * dpi, mbb.min.y * dpi,
                                                       (mbb.max.x - mbb.min.x) * dpi, (mbb.max.y - mbb.min.y) * dpi);
         return imgData
-    }
+}
 
 /*
 get the prediction 
@@ -125,8 +126,8 @@ function getFrame() {
         const probs = findTopValues(pred, 5)
         const names = getClassNames(indices)
 
-        //set the table 
-        setTable(names, probs)
+        //set the guesses 
+        setGuesses(names, probs)
     }
 
 }
@@ -142,7 +143,7 @@ function getClassNames(indices) {
 }
 
 /*
-load the class names 
+load the class names from file
 */
 async function loadDict() {
 
@@ -154,7 +155,7 @@ async function loadDict() {
 }
 
 /*
-load the class names
+load the class names from file
 */
 function success(data) {
     const lst = data.split(/\n/)
