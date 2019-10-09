@@ -158,9 +158,9 @@ load the class names
 */
 function success(data) {
     const lst = data.split(/\n/)
-    for (var i = 0; i < lst.length - 1; i++) {
+    for (var i = 0; i <= lst.length - 1; i++) {
         let symbol = lst[i]
-        console.log("class :", lst[i])
+        console.log("category :", lst[i])
         classNames[i] = symbol
     }
 }
