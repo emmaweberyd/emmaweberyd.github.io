@@ -1,0 +1,6 @@
+asparagus
+bush
+crab
+horse
+spider
+zebra
