@@ -137,6 +137,7 @@ get the the class names
 function getClassNames(indices) {
     var outp = []
     for (var i = 0; i < indices.length; i++)
+        console.log("class :", classNames[indices[i]])
         outp[i] = classNames[indices[i]]
     return outp
 }
