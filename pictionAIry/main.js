@@ -163,7 +163,7 @@ load the class names from file
 
 async function loadClassFile() {
   
-      loc = 'model/class_names.txt'
+      loc = 'model/class_names_2.txt'
 
     await $.ajax({
         url: loc,
@@ -239,7 +239,7 @@ load the model
 async function start() {
     
     //load the model 
-    model = await tf.loadLayersModel('model/model.json')
+    model = await tf.loadLayersModel('model/model2.json')
 
     
     //warm up 
