@@ -13,7 +13,7 @@ var mousePressed = false;
 prepare the drawing canvas 
 */
 $(function() {
-    console.log("in main.js")
+    //console.log("in main.js")
     canvas = window._canvas = new fabric.Canvas('canvas');
     canvas.backgroundColor = '#ffffff';
     canvas.isDrawingMode = 1;
@@ -45,7 +45,7 @@ setGuesses = (top5, probs) => {
         let prob = document.getElementById('prob')
         let firstGuess = top5[0];
         guess.innerHTML = "That's clearly " + getArticle(firstGuess) + " " + firstGuess +"!";
-        prob.innerHTML = Math.round(probs[0] * 100+"%")
+        prob.innerHTML = Math.round(probs[0] * 100)
 }
 
 /* check if the word starts with a wovel and return a/an */
@@ -56,7 +56,6 @@ getArticle = (guess) =>{
     var article = "";
     
     for (var i = 0; i < vowels.length; i++){
-        console.log(typeof guess);
         if(guess.charAt(0) === i) isVowel = true;
     }
 
@@ -178,7 +177,7 @@ function loadClassNames(data) {
     
     for (var i = 0; i <= lst.length - 1; i++) {
         let symbol = lst[i]
-        console.log("category :", lst[i])
+        //console.log("category :", lst[i])
         classNames[i] = symbol
     }
 }
@@ -265,7 +264,7 @@ function allowDrawing() {
 clear the canvs 
 */
 function erase() {
-    console.log("erase")
+   // console.log("erase")
     canvas.clear();
     canvas.backgroundColor = '#ffffff';
     coords = [];
