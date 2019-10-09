@@ -29,26 +29,25 @@
 	
 </head>
 <body>
-<nav class="navbar navbar-expand-sm bg-light navbar-light">
-  <!-- Brand/logo -->
-  <a class="navbar-brand" href="#"><h1><small>Piction</small>AI<small>ry</small></h1></a>
+  <nav class="navbar navbar-expand-sm bg-light navbar-light">
+    <!-- Brand/logo -->
+    <a class="navbar-brand" href="#"><h1><small>Piction</small>AI<small>ry</small></h1></a>
   </nav>
 
-<div class="row">
-  <div class="col" style ='margin-left:100px;'>
-<h4 id ='status' >Loading Model... </h4>	  
-<canvas id="canvas" width="300" height="300" class="canvas" style="border:1px solid #b9bfc9;margin-top:25px;"></canvas>
-<div class="btn-group" style = 'margin-top:40px; '>
-<button type="button" class="btn btn-outline-primary" onclick="erase()" style ='margin-left:10px;' >Clear</button>
-    </div>   
-</div>
-  <div class="col">
-    <section style="margin-top:120px">
-        <em id = "guess"></em>
-        <span id = "prob" ></span>
-    </section> 
-</div>
-</div>  
+  <div class="row">
+    <div class="col" style ='margin-left:100px;'>
+      <h4 id ='status' >Loading Model... </h4>	  
+      <canvas id="canvas" width="300" height="300" class="canvas" style="border:1px solid #b9bfc9;margin-top:25px;"></canvas>
+      <button type="button" class="btn btn-outline-primary" onclick="erase()" style ='margin-left:10px; margin-top:40px;' >Clear</button>  
+    </div>
+    <div class="col">
+      <section style="margin-top:120px">
+          <em id="guess"></em>
+          <span id="prob"></span>
+      </section> 
+    </div>
+  </div>  
+
 </body>
 <script>
 	console.log('starting');

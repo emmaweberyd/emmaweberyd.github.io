@@ -44,8 +44,8 @@ setGuesses = (top5, probs) => {
         let guess = document.getElementById('guess')
         let prob = document.getElementById('prob')
         let firstGuess = top5[0];
-        guess.innerHTML = "That's clearly " + getArticle(firstGuess) + " " + firstGuess +" !";
-        prob.innerHTML = Math.round(probs[0] * 100)
+        guess.innerHTML = "That's clearly " + getArticle(firstGuess) + " " + firstGuess +"!";
+        prob.innerHTML = Math.round(probs[0] * 100+"%")
 }
 
 /* check if the word starts with a wovel and return a/an */
@@ -160,12 +160,22 @@ function getClassNames(indices) {
 /*
 load the class names from file
 */
+
+async function loadClassFile() {
+  
+      loc = 'model/class_names.txt'
+
+    await $.ajax({
+        url: loc,
+        dataType: 'text',
+    }).done(loadClassNames);
+}
+
+
 function loadClassNames(data) {
     
-
-    var fs = require("fs");
-    var data = fs.readFileSync("./model/class_names.txt").toString();
-    const lst = data.split(/\n/)
+   const lst = data.split(/\n/);
+    
     for (var i = 0; i <= lst.length - 1; i++) {
         let symbol = lst[i]
         console.log("category :", lst[i])
@@ -239,7 +249,7 @@ async function start() {
     allowDrawing()
     
     //load the class names
-    loadClassNames()
+    await loadClassFile()
 }
 
 /*
