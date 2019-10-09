@@ -59,7 +59,7 @@ getArticle = (guess) =>{
         if(guess[0] === i) isVowel = true;
     }
 
-    if(isWovel) article = "an";
+    if(isVowel) article = "an";
     else article = "a";
 
     return article;
