@@ -56,7 +56,7 @@ getArticle = (guess) =>{
     var article = "";
     
     for (var i = 0; i < vowels.length; i++){
-        if(guess[0] === i) isVowel = true;
+        if(guess.charAt(0) === i) isVowel = true;
     }
 
     if(isVowel) article = "an";
