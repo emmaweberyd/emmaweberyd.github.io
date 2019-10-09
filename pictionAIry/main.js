@@ -160,19 +160,11 @@ function getClassNames(indices) {
 /*
 load the class names from file
 */
-async function loadDict() {
+function loadClassNames(data) {
+    
 
-    loc = 'model/class_names.txt'
-    await $.ajax({
-        url: loc,
-        dataType: 'text',
-    }).done(success);
-}
-
-/*
-load the class names from file
-*/
-function success(data) {
+    var fs = require("fs");
+    var data = fs.readFileSync("./model/class_names.txt").toString();
     const lst = data.split(/\n/)
     for (var i = 0; i <= lst.length - 1; i++) {
         let symbol = lst[i]
@@ -247,7 +239,7 @@ async function start() {
     allowDrawing()
     
     //load the class names
-    await loadDict()
+    loadClassNames()
 }
 
 /*
