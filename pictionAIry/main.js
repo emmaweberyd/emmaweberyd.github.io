@@ -8,7 +8,6 @@ var classNames = [];
 var canvas;
 var coords = [];
 var mousePressed = false;
-var mode;
 
 
 var canvas;
@@ -149,10 +148,6 @@ function getClassNames(indices) {
 load the class names 
 */
 async function loadDict() {
-    if (mode == 'ar')
-        loc = 'model2/class_names_ar.txt'
-    else
-        loc = 'model2/class_names.txt'
     
     await $.ajax({
         url: loc,
@@ -224,9 +219,7 @@ function preprocess(imgData) {
 /*
 load the model
 */
-async function start(cur_mode) {
-    //arabic or english
-    mode = cur_mode
+async function start() {
     
     //load the model 
     model = await tf.loadLayersModel('model/model.json')
@@ -247,10 +240,7 @@ allow drawing on canvas
 */
 function allowDrawing() {
     canvas.isDrawingMode = 1;
-    if (mode == 'en')
-        document.getElementById('status').innerHTML = 'Model Loaded';
-    else
-        document.getElementById('status').innerHTML = 'تم التحميل';
+    document.getElementById('status').innerHTML = 'Model Loaded';
     $('button').prop('disabled', false);
     var slider = document.getElementById('myRange');
     slider.oninput = function() {
