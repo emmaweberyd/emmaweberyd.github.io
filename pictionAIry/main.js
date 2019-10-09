@@ -51,7 +51,7 @@ setGuesses = (top5, probs) => {
 /* check if the word starts with a wovel and return a/an */
 getArticle = (guess) =>{
 
-    var vowels = [a, e, i, o, u];
+    var vowels = ["a", "e", "i", "o", "u"];
     var isVowel = false;
     var article = "";
     
