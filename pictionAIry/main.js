@@ -241,10 +241,6 @@ function allowDrawing() {
     canvas.isDrawingMode = 1;
     document.getElementById('status').innerHTML = 'Model Loaded';
     $('button').prop('disabled', false);
-    var slider = document.getElementById('myRange');
-    slider.oninput = function() {
-        canvas.freeDrawingBrush.width = this.value;
-    };
 }
 
 /*
