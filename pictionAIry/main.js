@@ -41,6 +41,10 @@ set the table of the predictions
 */
 setGuesses = (top5, probs) => {
 
+        for(var i=0; i < top5.length; i++){
+            console.log(top5[i], " percentage: ", probs[i])
+        }
+
         let guess = document.getElementById('guess')
         let prob = document.getElementById('prob')
         let firstGuess = top5[0];
