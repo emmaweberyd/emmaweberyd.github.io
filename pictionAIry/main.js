@@ -44,7 +44,7 @@ setGuesses = (top5, probs) => {
         for(var i=0; i < top5.length; i++){
             console.log(top5[i], " percentage: ", probs[i])
         }
-        console.log("------------------");
+        console.log("*-*-----------------*");
 
         let guess = document.getElementById('guess')
         let prob = document.getElementById('prob')

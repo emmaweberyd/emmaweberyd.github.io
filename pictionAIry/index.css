@@ -37,7 +37,7 @@ body {
     margin-left:20px;
 }
 .canvas{
-    border:0px solid #000;
+    border:1px solid #ccc;
     margin-top: 1em;
 }
 
