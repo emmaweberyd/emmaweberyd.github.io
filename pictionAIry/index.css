@@ -1,0 +1,43 @@
+/*** PAGE ***/
+body {
+    background:url("images/bg.png");
+    min-height : 100%;
+    min-width : 100%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    margin-left: 2em;
+    margin-right: 2em;
+}
+
+/*** NAV ***/
+.navbar {
+    position: relative;
+}
+.brand {
+    position: absolute;
+    left: 50%;
+    margin-left: -50px !important;
+    display: block;
+    margin-top:2em;
+    font-family: 'Mansalva', cursive;
+    font-size: 30px;
+}
+
+/*** ETC ***/
+
+#quote{
+    font-family: 'Mansalva', cursive;
+    font-size: 25px;
+}
+
+#clear_btn{
+    margin-top:20px;
+    margin-left:20px;
+}
+.canvas{
+    border:0px solid #000;
+    margin-top: 1em;
+}
+

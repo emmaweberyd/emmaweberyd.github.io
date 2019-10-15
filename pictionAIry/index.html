@@ -20,32 +20,42 @@
 	
 <!-- canvas script -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/3.4.0/fabric.min.js"></script>
-	
+
+
+<!-- Google fonts -->
+<link href="https://fonts.googleapis.com/css?family=Mansalva&display=swap" rel="stylesheet">
+
+<!-- Font awesome icon library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <!-- main script -->
 <script src = "main.js" > </script>
 
 <!-- main css -->
-<!-- <link rel = "stylesheet" href="main.css" >  -->
+<link rel="stylesheet" href="index.css"/>
 	
 </head>
 <body>
-  <nav class="navbar navbar-expand-sm bg-light navbar-light">
+  <nav class="navbar navbar-expand-sm bg-light navbar-light "> 
     <!-- Brand/logo -->
-    <a class="navbar-brand" href="#"><h1><small>Piction</small>AI<small>ry</small></h1></a>
+    <a class="brand"><h1><small>Piction</small>AI<small>ry</small></h1></a>
   </nav>
 
   <div class="row">
-    <div class="col" style ='margin-left:100px;'>
-      <h4 id ='status' >Loading Model... </h4>	  
-      <canvas id="canvas" width="300" height="300" class="canvas" style="border:1px solid #b9bfc9;margin-top:25px;"></canvas>
-      <button type="button" class="btn btn-outline-primary" onclick="erase()" style ='margin-left:10px; margin-top:40px;' >Clear</button>  
-    </div>
     <div class="col">
-      <section style="margin-top:120px">
-          <em id="guess"></em>
-          <span id="prob"></span>
-      </section> 
+      <h5 id ='status' >Loading Model... </h5>
+      <button type="button" class="btn btn-outline-secondary" onclick="erase()" >Clear</button>  
+      <div class="d-flex justify-content-center">
+      <canvas id="canvas" width="500" height="500" class="canvas"></canvas>
+      </div>
     </div>
+  </div>
+  <div class="row">
+    <div class="col d-flex justify-content-center" id="quote">
+      <em id="guess"></em>
+      <!-- <span id="prob"></span><span></span> -->
+    </div>
+  </div>
   </div>  
 
 </body>

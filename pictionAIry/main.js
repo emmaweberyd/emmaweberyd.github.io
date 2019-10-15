@@ -15,7 +15,7 @@ prepare the drawing canvas
 $(function() {
     //console.log("in main.js")
     canvas = window._canvas = new fabric.Canvas('canvas');
-    canvas.backgroundColor = '#ffffff';
+    canvas.backgroundColor = 'transparent';
     canvas.isDrawingMode = 1;
     canvas.freeDrawingBrush.color = "black";
     canvas.freeDrawingBrush.width =  5;
@@ -44,16 +44,17 @@ setGuesses = (top5, probs) => {
         for(var i=0; i < top5.length; i++){
             console.log(top5[i], " percentage: ", probs[i])
         }
+        console.log("------------------");
 
         let guess = document.getElementById('guess')
         let prob = document.getElementById('prob')
         let firstGuess = top5[0];
-        guess.innerHTML = "That's clearly " + getArticle(firstGuess) + " " + firstGuess +"!";
-        prob.innerHTML = Math.round(probs[0] * 100)
+        guess.innerHTML = "That's clearly " + formatWord(firstGuess) + " " + firstGuess +"!";
+        //prob.innerHTML = Math.round(probs[0] * 100)
 }
 
 /* check if the word starts with a wovel and return a/an */
-getArticle = (guess) =>{
+formatWord = (guess) =>{
 
     var vowels = ["a", "e", "i", "o", "u"];
     var isVowel = false;
@@ -129,7 +130,7 @@ getImageData = () => {
 /*
 get the prediction 
 */
-function getFrame() {
+getFrame = () => {
     //make sure we have at least two recorded coordinates 
     if (coords.length >= 2) {
 
@@ -153,7 +154,7 @@ function getFrame() {
 /*
 get the the class names 
 */
-function getClassNames(indices) {
+getClassNames = (indices) => {
     var outp = []
     for (var i = 0; i < indices.length; i++)
         outp[i] = classNames[indices[i]]
@@ -166,7 +167,7 @@ load the class names from file
 
 async function loadClassFile() {
   
-      loc = 'model/class_names_2.txt'
+    loc = 'model/class_names_2.txt'
 
     await $.ajax({
         url: loc,
@@ -175,7 +176,7 @@ async function loadClassFile() {
 }
 
 
-function loadClassNames(data) {
+loadClassNames = (data) => {
     
    const lst = data.split(/\n/);
     
@@ -189,7 +190,7 @@ function loadClassNames(data) {
 /*
 get indices of the top probs
 */
-function findIndicesOfMax(inp, count) {
+findIndicesOfMax = (inp, count) => {
     var outp = [];
     for (var i = 0; i < inp.length; i++) {
         outp.push(i); // add index to output array
@@ -206,7 +207,7 @@ function findIndicesOfMax(inp, count) {
 /*
 find the top 5 predictions
 */
-function findTopValues(inp, count) {
+findTopValues = (inp, count) => {
     var outp = [];
     let indices = findIndicesOfMax(inp, count)
     // show 5 greatest scores
@@ -218,7 +219,7 @@ function findTopValues(inp, count) {
 /*
 preprocess the data
 */
-function preprocess(imgData) {
+preprocess = (imgData) => {
     return tf.tidy(() => {
         //convert to a tensor 
         let tensor = tf.browser.fromPixels(imgData, numChannels = 1)
@@ -258,7 +259,7 @@ async function start() {
 /*
 allow drawing on canvas
 */
-function allowDrawing() {
+allowDrawing = () => {
     canvas.isDrawingMode = 1;
     document.getElementById('status').innerHTML = 'Model Loaded';
     $('button').prop('disabled', false);
@@ -267,9 +268,9 @@ function allowDrawing() {
 /*
 clear the canvs 
 */
-function erase() {
+erase = () => {
    // console.log("erase")
     canvas.clear();
-    canvas.backgroundColor = '#ffffff';
+    canvas.backgroundColor = 'transparent';
     coords = [];
 }
