@@ -24,29 +24,31 @@
 
 <!-- Google fonts -->
 <link href="https://fonts.googleapis.com/css?family=Mansalva&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Patrick+Hand&display=swap" rel="stylesheet">
 
 <!-- Font awesome icon library -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
 <!-- main script -->
-<script src = "main.js" > </script>
+<script src = "main.js"> </script>
 
 <!-- main css -->
 <link rel="stylesheet" href="index.css"/>
 	
 </head>
 <body>
-  <nav class="navbar navbar-expand-sm bg-light navbar-light "> 
+  <nav class="navbar bg-light navbar-light "> 
     <!-- Brand/logo -->
-    <a class="brand"><h1><small>Piction</small>AI<small>ry</small></h1></a>
+    <a class="brand">Piction<b>AI</b>ry</a>
+    <p>Draw something!</p>
+    <button type="button" onclick="erase()" class="btn btn-secondary px-3">Clear<i class="fas fa-birthday-cake" aria-hidden="true"></i></button> 
   </nav>
 
   <div class="row">
     <div class="col">
-      <h5 id ='status' >Loading Model... </h5>
-      <button type="button" class="btn btn-outline-secondary" onclick="erase()" >Clear</button>  
+      <!--<h5 id ='status' >Loading Model... </h5>-->
       <div class="d-flex justify-content-center">
-      <canvas id="canvas" width="500" height="500" class="canvas"></canvas>
+        <canvas id="canvas" width="450" height="450" class="canvas"></canvas>
       </div>
     </div>
   </div>

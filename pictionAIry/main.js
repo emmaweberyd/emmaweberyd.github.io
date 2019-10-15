@@ -9,6 +9,38 @@ var canvas;
 var coords = [];
 var mousePressed = false;
 
+var json_quotes = {
+    ambigious : 
+    [
+        "It doesn’t look like anything to me", 
+        "Excuse you, that is literally superbad", 
+        "Sorry, I didn’t quite get that", 
+        "Is this done?", 
+        "Waiting for it"
+    ],
+    fiftyfifty : [
+        "This is an obvious", 
+        "This is clearly"
+    ], 
+    barely : [
+        "It's barely", 
+        "It has the potential of becoming"
+    ],
+    clear : [
+        "A neat little scribble of", 
+        "I spy with my little AI: it's", 
+        "Oh I know this one! It's gotta be", 
+        "That's my favorite thing,"
+    ],
+    perfect : [
+        "Fantastic! 10 points to gryffindor! It's",
+        "Outstanding art performance:", 
+        "Anyone can see that's", 
+        "Even blind uncle Arnold could tell that's"
+    ]
+}
+
+
 /*
 prepare the drawing canvas 
 */
@@ -18,7 +50,7 @@ $(function() {
     canvas.backgroundColor = '#fff';
     canvas.isDrawingMode = 1;
     canvas.freeDrawingBrush.color = "black";
-    canvas.freeDrawingBrush.width =  5;
+    canvas.freeDrawingBrush.width =  8;
     canvas.renderAll();
     
 
@@ -42,34 +74,84 @@ set the table of the predictions
 setGuesses = (top5, probs) => {
 
         for(var i=0; i < top5.length; i++){
-            console.log(top5[i], " percentage: ", probs[i])
+            console.log(top5[i], ": ", Math.round(probs[i] * 100), "%");
         }
-        console.log("*-*-----------------*");
+        console.log("--------------------");
 
         let guess = document.getElementById('guess')
         let prob = document.getElementById('prob')
-        let firstGuess = top5[0];
-        guess.innerHTML = "That's clearly " + formatWord(firstGuess) + " " + firstGuess +"!";
-        //prob.innerHTML = Math.round(probs[0] * 100)
+        let firstGuess = {
+            guess: top5[0],
+            prob: Math.round(probs[0]*100)
+        }
+        let secondGuess = {
+            guess: top5[1],
+            prob: Math.round(probs[1]*100)
+        }
+
+        let quote = generateQuoteAccordingToAccoracy(firstGuess, secondGuess);    
+        document.getElementById("guess").innerHTML = quote;
 }
 
 /* check if the word starts with a wovel and return a/an */
 formatWord = (guess) =>{
 
-    var vowels = ["a", "e", "i", "o", "u"];
-    var isVowel = false;
-    var article = "";
-    
-    for (var i = 0; i < vowels.length; i++){
-        if(guess.charAt(0) === i) isVowel = true;
-    }
+    //var vowels = ["a", "e", "i", "o", "u"];
+    var first = guess.charAt(0);
+    var isVowel = first == "a" || first == "e" || first == "i" || first == "o" || first == "u";
+    var article, word = "";
 
     if(isVowel) article = "an";
     else article = "a";
+   
+    word = article + " " + guess;
 
-    return article;
+    return word;
+}
+
+/* 
+
+*/
+generateQuoteAccordingToAccoracy = (firstGuess, secondGuess) =>{
+
+    var firstWord = firstGuess.guess;
+    var prob_1 = firstGuess.prob;
+
+    var secondWord = secondGuess.guess;
+    var prob_2 = secondGuess.prob;
+
+    var noGuess = false;
+    var quoteList = [];
+    let quote = "";
+
+
+    /*if((prob_1 - prob_2) < 2){
+        quoteList = json_quotes.ambigious;
+    }*/
+    if(prob_1 <= 15 ){
+        quoteList = json_quotes.ambigious;
+        noGuess = true;
+    }
+    else if(prob_1 > 15 && prob_1 <= 60){
+        quoteList = json_quotes.barely;
+    }
+    else if(prob_1 > 60 && prob_1 <= 90){
+        quoteList = json_quotes.clear;
+    }
+    else if(prob_1 > 90){
+        quoteList = json_quotes.perfect;
+    }
+
+    let randIndex = Math.floor(Math.random()*quoteList.length);
+    let randQuote = quoteList[randIndex]
+    
+    if(noGuess) quote = randQuote;
+    else quote = randQuote + " " + formatWord(firstWord);
+
+    return quote;
 
 }
+
 
 /*
 record the current drawing coordinates
@@ -261,7 +343,7 @@ allow drawing on canvas
 */
 allowDrawing = () => {
     canvas.isDrawingMode = 1;
-    document.getElementById('status').innerHTML = 'Model Loaded';
+    //document.getElementById('status').innerHTML = 'Model Loaded';
     $('button').prop('disabled', false);
 }
 
@@ -269,8 +351,8 @@ allowDrawing = () => {
 clear the canvs 
 */
 erase = () => {
-   // console.log("erase")
     canvas.clear();
     canvas.backgroundColor = '#fff';
     coords = [];
+    guess.innerHTML = "";
 }
