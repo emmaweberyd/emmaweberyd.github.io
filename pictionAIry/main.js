@@ -15,7 +15,7 @@ prepare the drawing canvas
 $(function() {
     //console.log("in main.js")
     canvas = window._canvas = new fabric.Canvas('canvas');
-    canvas.backgroundColor = 'transparent';
+    canvas.backgroundColor = '#fff';
     canvas.isDrawingMode = 1;
     canvas.freeDrawingBrush.color = "black";
     canvas.freeDrawingBrush.width =  5;
@@ -271,6 +271,6 @@ clear the canvs
 erase = () => {
    // console.log("erase")
     canvas.clear();
-    canvas.backgroundColor = 'transparent';
+    canvas.backgroundColor = '#fff';
     coords = [];
 }
