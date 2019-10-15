@@ -243,7 +243,7 @@ load the model
 async function start() {
     
     //load the model 
-    model = await tf.loadLayersModel('model/model_2.json')
+    model = await tf.loadLayersModel('model/model.json')
 
     
     //warm up 
