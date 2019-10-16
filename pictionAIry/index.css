@@ -32,6 +32,7 @@ body {
     margin-top:20px;
 }
 .canvas, #canvas {
+    position: absolute;
     border:0px solid #ccc;
     margin-top: 3em;
 }

@@ -89,8 +89,12 @@ setGuesses = (top5, probs) => {
             prob: Math.round(probs[1]*100)
         }
 
-        let quote = generateQuoteAccordingToAccoracy(firstGuess, secondGuess);    
+        // generate quote randomly of first guess
+        let quote = generateQuoteAccordingToAccuracy(firstGuess, secondGuess);    
         document.getElementById("guess").innerHTML = quote;
+
+        // set table of probabilities
+        setTable(top5, probs);
 }
 
 /* check if the word starts with a wovel and return a/an */
@@ -109,10 +113,23 @@ formatWord = (guess) =>{
     return word;
 }
 
+setTable = (top5, probs) => {
+
+    let text = document.getElementById('also');
+    text.innerHTML = "It could also be: ";
+        //loop over the predictions 
+        for (var i = 0; i < top5.length; i++) {
+            let sym = document.getElementById('sym' + (i + 1))
+            let prob = document.getElementById('prob' + (i + 1))
+            sym.innerHTML = top5[i]
+            prob.innerHTML = " "+Math.round(probs[i] * 100)+"%"
+        }
+}
+
 /* 
 
 */
-generateQuoteAccordingToAccoracy = (firstGuess, secondGuess) =>{
+generateQuoteAccordingToAccuracy = (firstGuess, secondGuess) =>{
 
     var firstWord = firstGuess.guess;
     var prob_1 = firstGuess.prob;
@@ -206,6 +223,7 @@ getImageData = () => {
         const dpi = window.devicePixelRatio
         const imgData = canvas.contextContainer.getImageData(mbb.min.x * dpi, mbb.min.y * dpi,
                                                       (mbb.max.x - mbb.min.x) * dpi, (mbb.max.y - mbb.min.y) * dpi);
+            console.log(imgData)
         return imgData
 }
 
@@ -308,6 +326,8 @@ preprocess = (imgData) => {
         
         //resize 
         const resized = tf.image.resizeBilinear(tensor, [28, 28]).toFloat()
+
+        console.log(resized)
         
         //normalize 
         const offset = tf.scalar(255.0);
