@@ -23,7 +23,6 @@ basket
 basketball
 bat
 bathtub
-beach
 bear
 beard
 bed
@@ -56,7 +55,6 @@ calculator
 calendar
 camel
 camera
-camouflage
 campfire
 candle
 cannon

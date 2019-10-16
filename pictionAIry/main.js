@@ -73,10 +73,12 @@ set the table of the predictions
 */
 setGuesses = (top5, probs) => {
 
+
+    console.log("\n---- TOP 5 ----");
+
         for(var i=0; i < top5.length; i++){
             console.log(top5[i], ": ", Math.round(probs[i] * 100), "%");
         }
-        console.log("--------------------");
 
         let guess = document.getElementById('guess')
         let prob = document.getElementById('prob')
@@ -93,14 +95,28 @@ setGuesses = (top5, probs) => {
         let quote = generateQuoteAccordingToAccuracy(firstGuess, secondGuess);    
         document.getElementById("guess").innerHTML = quote;
 
-        // set table of probabilities
-        setTable(top5, probs);
+        let top_title = document.getElementById("top5");
+        top_title.innerHTML = "These are my top 5 predictions:"
+
+        if (top5 != null){
+            var items = document.getElementById("prob");
+            while (items.firstChild) {
+                items.removeChild(items.firstChild);
+            }
+            for (var i = 0; i < top5.length; i++ ) {
+                var item = document.createElement("li");
+                item.innerHTML = top5[i] + " - " + Math.floor((probs[i]*100)+0.5) + "%";
+                items.appendChild(item);
+            }
+
+            document.getElementById("prob_container").style.display = "block";
+
+        }
 }
 
 /* check if the word starts with a wovel and return a/an */
 formatWord = (guess) =>{
 
-    //var vowels = ["a", "e", "i", "o", "u"];
     var first = guess.charAt(0);
     var isVowel = first == "a" || first == "e" || first == "i" || first == "o" || first == "u";
     var article, word = "";
@@ -113,22 +129,7 @@ formatWord = (guess) =>{
     return word;
 }
 
-setTable = (top5, probs) => {
 
-    let text = document.getElementById('also');
-    text.innerHTML = "It could also be: ";
-        //loop over the predictions 
-        for (var i = 0; i < top5.length; i++) {
-            let sym = document.getElementById('sym' + (i + 1))
-            let prob = document.getElementById('prob' + (i + 1))
-            sym.innerHTML = top5[i]
-            prob.innerHTML = " "+Math.round(probs[i] * 100)+"%"
-        }
-}
-
-/* 
-
-*/
 generateQuoteAccordingToAccuracy = (firstGuess, secondGuess) =>{
 
     var firstWord = firstGuess.guess;
@@ -145,6 +146,7 @@ generateQuoteAccordingToAccuracy = (firstGuess, secondGuess) =>{
     /*if((prob_1 - prob_2) < 2){
         quoteList = json_quotes.ambigious;
     }*/
+
     if(prob_1 <= 15 ){
         quoteList = json_quotes.ambigious;
         noGuess = true;
@@ -223,7 +225,6 @@ getImageData = () => {
         const dpi = window.devicePixelRatio
         const imgData = canvas.contextContainer.getImageData(mbb.min.x * dpi, mbb.min.y * dpi,
                                                       (mbb.max.x - mbb.min.x) * dpi, (mbb.max.y - mbb.min.y) * dpi);
-            console.log(imgData)
         return imgData
 }
 
@@ -248,7 +249,6 @@ getFrame = () => {
         //set the guesses 
         setGuesses(names, probs)
     }
-
 }
 
 /*
@@ -258,7 +258,7 @@ getClassNames = (indices) => {
     var outp = []
     for (var i = 0; i < indices.length; i++)
         outp[i] = classNames[indices[i]]
-    return outp
+    return outp;
 }
 
 /*
@@ -282,7 +282,6 @@ loadClassNames = (data) => {
     
     for (var i = 0; i <= lst.length - 1; i++) {
         let symbol = lst[i]
-        //console.log("category :", lst[i])
         classNames[i] = symbol
     }
 }
@@ -326,8 +325,6 @@ preprocess = (imgData) => {
         
         //resize 
         const resized = tf.image.resizeBilinear(tensor, [28, 28]).toFloat()
-
-        console.log(resized)
         
         //normalize 
         const offset = tf.scalar(255.0);
@@ -347,7 +344,6 @@ async function start() {
     //load the model 
     model = await tf.loadLayersModel('model/model.json')
 
-    
     //warm up 
     model.predict(tf.zeros([1, 28, 28, 1]))
     
@@ -368,11 +364,14 @@ allowDrawing = () => {
 }
 
 /*
-clear the canvs 
+clear the canvas 
 */
 erase = () => {
     canvas.clear();
     canvas.backgroundColor = '#fff';
     coords = [];
-    guess.innerHTML = "";
+    guess.innerHTML = "Quick, draw something!";
+    top5.innerHTML = "";
+    prob.innerHTML = "";
+    document.getElementById("prob_container").style.display = "none";
 }

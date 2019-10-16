@@ -5,6 +5,7 @@
 
 <!-- bs4 css -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"/>
+<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -26,8 +27,6 @@
 <link href="https://fonts.googleapis.com/css?family=Mansalva&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Patrick+Hand&display=swap" rel="stylesheet">
 
-<!-- Font awesome icon library -->
-<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
 <!-- main script -->
 <script src = "main.js"> </script>
@@ -37,32 +36,41 @@
 	
 </head>
 <body>
+
   <nav class="navbar bg-light navbar-light "> 
     <!-- Brand/logo -->
-    <a class="brand">Piction<b>AI</b>ry</a>
-    <p>Draw something!</p>
-    <button type="button" onclick="erase()" class="btn btn-secondary px-3">Clear<i class="fas fa-birthday-cake" aria-hidden="true"></i></button> 
+    <a class="brand">Piction<span id="title_ai">AI</span>ry</a>
+    <button type="button" id="btn" onclick="erase()"><i class="icon-repeat icon-3x"></i></button> 
   </nav>
 
-  <div class="row">
-    <div class="col">
-      <!--<h5 id ='status' >Loading Model... </h5>-->
-      <div class="d-flex justify-content-center">
-        <canvas id="canvas" width="450" height="450" class="canvas"></canvas>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col d-flex justify-content-center" id="quote">
-      <p id="guess"></p>
-      <!-- <span id="prob"></span><span></span> -->
-    </div>
-  </div>
-  </div>  
+  <div class="container">
+    <div class="row">
+      <div class="col-lg">
+          <canvas id="canvas" width="450" height="450" class="canvas"></canvas>
+        </div>
+      <div class="col-lg">
+        <div class ="row">
+          <div id="guess_container">
+            <p id="guess">Quick, draw something!</p>
+          </div>
+        </div> 
+        <div class="row">
+          <div id="prob_container">
+            <p id="top5">... And I will predict what you drew using a convolutional neural network. 
+              The network was trained to recognize 100 different classes of doodles from Google's 
+              <a target="blank_" href="https://quickdraw.withgoogle.com/data">Quick Draw dataset</a>. 
+              Please be considerate, I've only experienced 15 000 unique doodles from each class.
+            </p>
+            <ul id="prob" ></ul>
+          </div>
+        </div> <!-- /row -->
+      </div> <!-- /col -->
+    </div> <!-- row -->
+  </div> <!-- /container -->
 
 </body>
+
 <script>
-	console.log('starting');
 	start()
 </script>
 </html>

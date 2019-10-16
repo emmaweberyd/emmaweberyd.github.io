@@ -5,7 +5,7 @@ body {
     min-width : 100%;
     background-size: 100% 100%;
     background-repeat:repeat-y;
-    overflow-y: hidden;
+    overflow-y: auto;
     overflow-x: hidden;
 }
 
@@ -13,32 +13,76 @@ body {
 .navbar {
     /*position: relative;*/
     height: 7em;
+    margin-bottom: 3em;
+    padding-left: 2em;
+    padding-right: 2em;
 } 
 .brand {
-    left: 1em;
     display: block;
     font-family: 'Patrick Hand';
-    font-size: 55px;
+    font-size: 3.5em;
 }
 
 /*** ETC ***/
 
-#quote, p{
+#prob{
+   list-style-type: None;
+   font-family: 'Patrick Hand';
+   font-size: 1.2em;
+}
+
+#prob_container, #guess_container{
+    padding: 1em 1em;
+    width: 20em;
+    display: block;
+    background-color: transparent;
+    padding-bottom: 1.5em;
+}
+
+#prob_container { 
+    display: block;
+    width: 22em;
+}
+
+#guess_container{
+    height:7em;
+    display:flex;
+    align-items:center;
+}
+
+#guess{
     font-family: 'Patrick Hand';
-    font-size: 25px;
+    font-size: 2em;
+    font-weight: bold;
 }
 
-#clear_btn{
-    margin-top:20px;
+#top5{
+    color: #555;
 }
+
+p{
+    font-family: 'Patrick Hand';
+    font-size: 1.3em;
+}
+
+a, a:hover, a:visited {
+    text-decoration: none;
+    color: #ffab40;
+
+}
+
 .canvas, #canvas {
-    position: absolute;
     border:0px solid #ccc;
-    margin-top: 3em;
 }
 
-.button {
-    background-color: white;
+
+#title_ai {
+    font-weight: bold;
+    color: #ffab40;
+}
+
+#btn {
+    background-color: Transparent;
     background-repeat:no-repeat;
     border: none;
     cursor:pointer;
