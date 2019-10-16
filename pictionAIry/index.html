@@ -44,21 +44,43 @@
     <button type="button" onclick="erase()" class="btn btn-secondary px-3">Clear<i class="fas fa-birthday-cake" aria-hidden="true"></i></button> 
   </nav>
 
-  <div class="row">
-    <div class="col">
-      <!--<h5 id ='status' >Loading Model... </h5>-->
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
+        <ul id="prob" style="margin-top: 50px; list-style-type: None;"></ul>
+      </div>
+      <div class="col-sm">
+        <canvas id="canvas" width="450" height="450" class="canvas"></canvas>
+      </div>
+      <div class="col-sm">
+      </div>
+    </div>
+    <div class="row">
+        <div class="col d-flex justify-content-center" id="quote">
+          <em id="guess"></em>
+        </div>
+    </div>
+  </div>
+
+
+  <!-- <div class="row">
+    <div class="col-lg-4">
+      <span id="prob">hi</span><span></span>
+    </div>
+    <div class="col-lg-4">
       <div class="d-flex justify-content-center">
         <canvas id="canvas" width="450" height="450" class="canvas"></canvas>
       </div>
+    </div>
+    <div class="col-lg-4">
     </div>
   </div>
   <div class="row">
     <div class="col d-flex justify-content-center" id="quote">
       <em id="guess"></em>
-      <!-- <span id="prob"></span><span></span> -->
     </div>
   </div>
-  </div>  
+  </div>   -->
 
 </body>
 <script>

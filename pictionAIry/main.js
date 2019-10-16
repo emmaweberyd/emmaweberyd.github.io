@@ -91,6 +91,18 @@ setGuesses = (top5, probs) => {
 
         let quote = generateQuoteAccordingToAccoracy(firstGuess, secondGuess);    
         document.getElementById("guess").innerHTML = quote;
+        if (top5 != null){
+            var items = document.getElementById("prob");
+            while (items.firstChild) {
+                items.removeChild(items.firstChild);
+            }
+            for (var i = 0; i < top5.length; i++ ) {
+                var item = document.createElement("li");
+                item.innerHTML = top5[i] + " " + Math.floor((probs[i]*100)+0.5) + "%";
+                items.appendChild(item);
+            }
+
+        }
 }
 
 /* check if the word starts with a wovel and return a/an */
